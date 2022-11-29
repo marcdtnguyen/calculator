@@ -17,13 +17,13 @@ let ex = ['0'];
 
 window.addEventListener('keydown', handleKey);
 
-const digits = document.querySelector('.digits');
-for(let i = 0; i < 10; i++){
-    let digit = document.createElement('button');
-    digit.innerText = i;
-    digit.addEventListener('click', handleBtn);
-    digits.appendChild(digit);
-}
+// const digits = document.querySelector('.digits');
+// for(let i = 0; i < 10; i++){
+//     let digit = document.createElement('button');
+//     digit.innerText = i;
+//     digit.addEventListener('click', handleBtn);
+//     digits.appendChild(digit);
+// }
 
 const opBtns = document.querySelector('.operators');
 
