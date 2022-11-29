@@ -17,12 +17,42 @@ let ex = ['0'];
 
 window.addEventListener('keydown', handleKey);
 
+const digits = document.querySelector('.digits');
+for(let i = 0; i < 10; i++){
+    let digit = document.createElement('button');
+    digit.innerText = i;
+    digit.addEventListener('click', handleBtn);
+    digits.appendChild(digit);
+}
+
+const opBtns = document.querySelector('.operators');
+
+for(let op in operations){
+    let opBtn = document.createElement('button');
+    opBtn.innerText = op;
+    opBtn.addEventListener('click', handleBtn);
+    opBtns.appendChild(opBtn);
+}
+
+const equal = document.createElement('button');
+equal.innerText = '=';
+equal.addEventListener('click', handleBtn);
+opBtns.appendChild(equal);
+
 function handleKey(e){
-    switch(e.key){
+    handleValue(e.key);
+}
+
+function handleBtn(e){
+    handleValue(e.target.innerText)
+}
+
+function handleValue(v){
+    switch(v){
         case "=": evaluate(ex); break;
         case "Enter": evaluate(ex); break;
         case "Backspace": remove(); break;
-        default: addKey(e.key);
+        default: addKey(v);
     }
     print();
 }
@@ -35,6 +65,7 @@ function addKey(key){
     const lastIndex = ex.length-1;
     if(isNumber(key)) addNum(key, lastIndex);
     if(operators.includes(key)) addOp(key, lastIndex);
+    console.log(ex)
 }
 
 function addNum(num, lastIndex){
@@ -45,6 +76,10 @@ function addNum(num, lastIndex){
     } else {
         ex.push(num);
     }
+}
+
+function isNumber(n){
+    return !Number.isNaN(Number(n));
 }
 
 function addOp(op, lastIndex){
@@ -60,10 +95,6 @@ function addOp(op, lastIndex){
     } else{
         ex.push(op);
     }
-}
-
-function isNumber(n){
-    return !Number.isNaN(Number(n));
 }
 
 function evaluate(ex){
