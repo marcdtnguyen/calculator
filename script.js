@@ -5,7 +5,14 @@ function divide(a, b) { return a / b };
 function powerOf(a, b) { return a ** b};
 
 const value = document.querySelector('.value');
-const operators = ['+', '-', '*', '/', '**', '^'];
+const operations = {
+    '^': powerOf,
+    '*': multiply,
+    '/': divide,
+    '+': add,
+    '-': subtract
+}
+const operators = Object.keys(operations);
 let ex = ['0'];
 
 window.addEventListener('keydown', handleKey);
@@ -61,7 +68,18 @@ function isNumber(n){
 
 function evaluate(ex){
     if(operators.includes(ex[ex.length-1])) remove();
-    console.log(ex)
+    for(let key in operations){
+        evalOp(key, operations[key]);
+    }
+}
+
+function evalOp(op, meth){
+    while(ex.includes(op)){
+        const i = ex.indexOf(op);
+        const a = ex[i-1];
+        const b = ex[i+1];
+        ex.splice(i-1, 3, meth(Number(a), Number(b)));
+    }
 }
 
 function remove(){
