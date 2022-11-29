@@ -17,12 +17,28 @@ let ex = ['0'];
 
 window.addEventListener('keydown', handleKey);
 
+const digits = document.querySelector('.digits');
+for(let i = 0; i < 10; i++){
+    let digit = document.createElement('button');
+    digit.innerText = i;
+    digit.addEventListener('click', handleBtn);
+    digits.appendChild(digit);
+}
+
 function handleKey(e){
-    switch(e.key){
+    handleValue(e.key);
+}
+
+function handleBtn(e){
+    handleValue(e.target.innerText)
+}
+
+function handleValue(v){
+    switch(v){
         case "=": evaluate(ex); break;
         case "Enter": evaluate(ex); break;
         case "Backspace": remove(); break;
-        default: addKey(e.key);
+        default: addKey(v);
     }
     print();
 }
@@ -47,6 +63,10 @@ function addNum(num, lastIndex){
     }
 }
 
+function isNumber(n){
+    return !Number.isNaN(Number(n));
+}
+
 function addOp(op, lastIndex){
     if(ex[lastIndex] == '*' && op == '*') {
         ex[lastIndex] = '^';
@@ -60,10 +80,6 @@ function addOp(op, lastIndex){
     } else{
         ex.push(op);
     }
-}
-
-function isNumber(n){
-    return !Number.isNaN(Number(n));
 }
 
 function evaluate(ex){
