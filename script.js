@@ -45,6 +45,7 @@ function handleKey(e){
 
 function handleBtn(e){
     handleValue(e.target.innerText)
+    e.target.blur();
 }
 
 function handleValue(v){
