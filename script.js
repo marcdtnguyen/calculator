@@ -25,6 +25,20 @@ for(let i = 0; i < 10; i++){
     digits.appendChild(digit);
 }
 
+const opBtns = document.querySelector('.operators');
+
+for(let op in operations){
+    let opBtn = document.createElement('button');
+    opBtn.innerText = op;
+    opBtn.addEventListener('click', handleBtn);
+    opBtns.appendChild(opBtn);
+}
+
+const equal = document.createElement('button');
+equal.innerText = '=';
+equal.addEventListener('click', handleBtn);
+opBtns.appendChild(equal);
+
 function handleKey(e){
     handleValue(e.key);
 }
@@ -51,6 +65,7 @@ function addKey(key){
     const lastIndex = ex.length-1;
     if(isNumber(key)) addNum(key, lastIndex);
     if(operators.includes(key)) addOp(key, lastIndex);
+    console.log(ex)
 }
 
 function addNum(num, lastIndex){
