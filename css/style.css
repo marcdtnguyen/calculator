@@ -47,3 +47,8 @@ main {
 .right button {
     width: 50%;
 }
+
+button {
+    background-color: rgb(24, 24, 24);
+    color: rgb(214, 214, 214);
+}
