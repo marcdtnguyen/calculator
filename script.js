@@ -6,7 +6,7 @@ function powerOf(a, b) { return a ** b};
 
 const result = document.querySelector('.result');
 const value = document.querySelector('.expression')
-const expression = ['0'];
+let expression = ['0'];
 const operations = {
     '^': powerOf,
     '*': multiply,
@@ -37,6 +37,7 @@ function handleValue(v){
         case "=": evaluate(expression); break;
         case "Enter": evaluate(expression); break;
         case "Backspace": remove(); break;
+        case "clear" : expression = ['0'];
         default: addKey(v);
     }
     print();
@@ -48,15 +49,16 @@ function print(){
 
 function addKey(key){
     const lastIndex = expression.length-1;
-    if(isNumber(key)) addNum(key, lastIndex);
+    //added bullet point code here
+    if(isNumber(key) || key == '.') addNum(key, lastIndex);
     if(operators.includes(key)) addOp(key, lastIndex);
-    console.log(expression)
 }
 
 function addNum(num, lastIndex){
-    if(expression[lastIndex] == '0'){
+    //and here
+    if(expression[lastIndex] == '0' && num != '.'){
         expression[lastIndex] = num;
-    } else if(isNumber(expression[lastIndex])){
+    } else if(isNumber(expression[lastIndex]) || num == '.'){
         expression[lastIndex] += num;
     } else {
         expression.push(num);
@@ -94,7 +96,15 @@ function evalOp(op, meth){
 }
 
 function remove(){
-    (expression.length == 1) ? expression[0] = 0 : expression.pop();
-    value.innerText = expression.join(' ');
+    if(expression.length == 1 && expression[0].length == 1){
+        expression[0] = 0;
+    } else if (expression.length == 1 && expression[0] == 0){
+        return
+    } else if (expression[expression.length-1].length > 1){
+        expression[expression.length-1] = expression[expression.length-1].slice(0, -1);
+    } else {  
+        expression.pop();
+    }
+    print()
 }
 
