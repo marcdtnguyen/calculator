@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 main {
     display: flex;
     justify-content: center;
@@ -17,4 +20,30 @@ main {
 .display {
     border: solid 5px rgba(226, 255, 140, 0.319);
     background-color: rgba(47, 255, 255, 0.586);
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left {
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+.left button {
+ width: 33%;
+}
+
+.right {
+    display: flex;
+    width: 40%;
+    flex-wrap: wrap;
+}
+
+.right button {
+    width: 50%;
 }
