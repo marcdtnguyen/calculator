@@ -2,11 +2,19 @@ main {
     display: flex;
     justify-content: center;
 }
-.calculator {
-    background-color: gray;
-    /* flex-basis: 600px;
-    flex-grow: 0;
-    flex-shrink: 1;*/
+
+.trim {
+    background-color: rgb(140, 140, 140);
     width:600px;
     margin: 0 5vw;
+    padding: 5px;
+}
+.calculator {
+    background-color: rgb(50, 50, 50);
+    padding: 5px;
+}
+
+.display {
+    border: solid 5px rgba(226, 255, 140, 0.319);
+    background-color: rgba(47, 255, 255, 0.586);
 }
