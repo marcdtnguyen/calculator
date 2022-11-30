@@ -6,13 +6,13 @@ main {
     justify-content: center;
 }
 
-.trim {
+.calculator {
     background-color: rgb(140, 140, 140);
     width:600px;
     margin: 0 5vw;
     padding: 5px;
 }
-.calculator {
+.base {
     background-color: rgb(50, 50, 50);
     padding: 5px;
 }
