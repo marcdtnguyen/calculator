@@ -52,16 +52,15 @@ function print(){
 
 function addKey(key){
     const lastIndex = expression.length-1;
-    //added bullet point code here
-    if(isNumber(key) || key == '.') addNum(key, lastIndex);
+    if(isNumber(key)) addNum(key, lastIndex);
     if(operators.includes(key)) addOp(key, lastIndex);
+    if(key == '.' && !expression[lastIndex].includes('.')) expression[lastIndex] += key;
 }
 
 function addNum(num, lastIndex){
-    //and here
-    if(expression[lastIndex] == '0' && num != '.'){
+    if(expression[lastIndex] == '0'){
         expression[lastIndex] = num;
-    } else if(isNumber(expression[lastIndex]) || num == '.'){
+    } else if(isNumber(expression[lastIndex])){
         expression[lastIndex] += num;
     } else {
         expression.push(num);
@@ -87,7 +86,8 @@ function evaluate(){
     for(let key in operations){
         evalOp(key, operations[key]);
     }
-    ans = expression[0].toString();
+    expression[0] = expression[0].toString()
+    ans = expression[0];
     format[format.length-1] = ans;
     result.innerText = format.join(' ');
 }
