@@ -10,21 +10,28 @@ main {
     background-color: rgb(140, 140, 140);
     width:600px;
     margin: 0 5vw;
-    padding: 5px;
+    padding: 2%;
+    height: 80vh;
+    border-radius: 3%;
 }
 .base {
     background-color: rgb(50, 50, 50);
     padding: 5px;
+    height: 100%;
+    padding: 5%;
+    border-radius: 3% 3% 10% 10%;
 }
 
 .display {
     border: solid 5px rgba(226, 255, 140, 0.319);
     background-color: rgba(47, 255, 255, 0.586);
+    height: 20%;
 }
 
 .buttons {
     display: flex;
     justify-content: space-between;
+    height: 80%;
 }
 
 .left {
@@ -35,7 +42,7 @@ main {
     flex-direction: row-reverse;
 }
 .left button {
- width: 33%;
+ width: 32%;
 }
 
 .right {
@@ -46,16 +53,22 @@ main {
 }
 
 .right button {
-    width: 50%;
+    width: 48%;
 }
 
 button {
     background-color: rgb(24, 24, 24);
     color: rgb(214, 214, 214);
+    border-radius: 20px 20px 40px 40px;
 }
 
 button[value='delete'],
 button[value='clear']{
     background-color: rgb(255, 145, 1);
     color: black
+}
+
+.left,
+.right{
+    gap: 1%;
 }
