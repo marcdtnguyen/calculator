@@ -1,21 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
     <script src="./script.js" defer></script>
 </head>
+
 <body>
+    <header>
+        <h1>Calculator</h1>
+    </header>
     <main>
-    <section class="display">
-        <p class="value">0</p>
-    </section>
-    <section class="buttons">
-        <div class="operators"></div>
-        <div class="digits"></div>
-    </section>
+        <section class="calculator">
+            <div class="base">
+                <section class="display">
+                    <p class="result">Ans = 0</p>
+                    <p class="expression">0</p>
+                </section>
+                <section class="buttons">
+                    <div class="left">
+                        <button class='digit' value="9">9</button>
+                        <button class='digit' value="8">8</button>
+                        <button class='digit' value="7">7</button>
+                        <button class='digit' value="6">6</button>
+                        <button class='digit' value="5">5</button>
+                        <button class='digit' value="4">4</button>
+                        <button class='digit' value="3">3</button>
+                        <button class='digit' value="2">2</button>
+                        <button class='digit' value="1">1</button>
+                        <button value="=">=</button>
+                        <button value=".">.</button>
+                        <button class='digit' value="0">0</button>
+                    </div>
+                    <div class="right">
+                        <button value="clear">AC</button>
+                        <button value="Backspace">DEL</button>
+                        <button value="/">÷</button>
+                        <button value="*">x</button>
+                        <button value="-">-</button>
+                        <button value="+">+</button>
+                        <button value="^">^</button>
+                        <button value="ans">Ans</button>
+                    </div>
+                </section>
+            </div>
+        </section>
     </main>
 </body>
+
 </html>

@@ -4,7 +4,11 @@ function multiply(a, b) { return a * b };
 function divide(a, b) { return a / b };
 function powerOf(a, b) { return a ** b};
 
-const value = document.querySelector('.value');
+const result = document.querySelector('.result');
+const format = result.innerText.split(' ');
+const value = document.querySelector('.expression');
+let expression = ['0'];
+let ans = 0;
 const operations = {
     '^': powerOf,
     '*': multiply,
@@ -13,68 +17,53 @@ const operations = {
     '-': subtract
 }
 const operators = Object.keys(operations);
-let ex = ['0'];
 
 window.addEventListener('keydown', handleKey);
 
-const digits = document.querySelector('.digits');
-for(let i = 0; i < 10; i++){
-    let digit = document.createElement('button');
-    digit.innerText = i;
-    digit.addEventListener('click', handleBtn);
-    digits.appendChild(digit);
-}
-
-const opBtns = document.querySelector('.operators');
-
-for(let op in operations){
-    let opBtn = document.createElement('button');
-    opBtn.innerText = op;
-    opBtn.addEventListener('click', handleBtn);
-    opBtns.appendChild(opBtn);
-}
-
-const equal = document.createElement('button');
-equal.innerText = '=';
-equal.addEventListener('click', handleBtn);
-opBtns.appendChild(equal);
+const buttons = Array.from(document.querySelectorAll('button'));
+buttons.forEach(button=>{
+    button.addEventListener('click', handleBtn)
+})
 
 function handleKey(e){
     handleValue(e.key);
 }
 
 function handleBtn(e){
-    handleValue(e.target.innerText)
+    handleValue(e.target.value)
+    e.target.blur();
 }
 
 function handleValue(v){
     switch(v){
-        case "=": evaluate(ex); break;
-        case "Enter": evaluate(ex); break;
+        case "=": evaluate(expression); break;
+        case "Enter": evaluate(expression); break;
         case "Backspace": remove(); break;
+        case "clear" : expression = ['0']; break;
+        case "ans" : addKey(ans); break;
         default: addKey(v);
     }
     print();
 }
 
 function print(){
-    value.innerText = ex.join(' ');
+    value.innerText = expression.join(' ');
 }
 
 function addKey(key){
-    const lastIndex = ex.length-1;
+    const lastIndex = expression.length-1;
     if(isNumber(key)) addNum(key, lastIndex);
     if(operators.includes(key)) addOp(key, lastIndex);
-    console.log(ex)
+    if(key == '.' && !expression[lastIndex].includes('.')) expression[lastIndex] += key;
 }
 
 function addNum(num, lastIndex){
-    if(ex[lastIndex] == '0'){
-        ex[lastIndex] = num;
-    } else if(isNumber(ex[lastIndex])){
-        ex[lastIndex] += num;
+    if(expression[lastIndex] == '0'){
+        expression[lastIndex] = num;
+    } else if(isNumber(expression[lastIndex])){
+        expression[lastIndex] += num;
     } else {
-        ex.push(num);
+        expression.push(num);
     }
 }
 
@@ -83,38 +72,45 @@ function isNumber(n){
 }
 
 function addOp(op, lastIndex){
-    if(ex[lastIndex] == '*' && op == '*') {
-        ex[lastIndex] = '^';
-        return;
-    };
+    if(expression[lastIndex] == op) return;
 
-    if(ex[lastIndex] == op) return;
-
-    if(operators.includes(ex[lastIndex])){
-        ex[lastIndex] = op;
+    if(operators.includes(expression[lastIndex])){
+        expression[lastIndex] = op;
     } else{
-        ex.push(op);
+        expression.push(op);
     }
 }
 
-function evaluate(ex){
-    if(operators.includes(ex[ex.length-1])) remove();
+function evaluate(){
+    if(operators.includes(expression[expression.length-1])) remove();
     for(let key in operations){
         evalOp(key, operations[key]);
     }
+    expression[0] = expression[0].toString()
+    ans = expression[0];
+    format[format.length-1] = ans;
+    result.innerText = format.join(' ');
 }
 
 function evalOp(op, meth){
-    while(ex.includes(op)){
-        const i = ex.indexOf(op);
-        const a = ex[i-1];
-        const b = ex[i+1];
-        ex.splice(i-1, 3, meth(Number(a), Number(b)));
+    while(expression.includes(op)){
+        const i = expression.indexOf(op);
+        const a = expression[i-1];
+        const b = expression[i+1];
+        expression.splice(i-1, 3, meth(Number(a), Number(b)));
     }
 }
 
 function remove(){
-    (ex.length == 1) ? ex[0] = 0 : ex.pop();
-    value.innerText = ex.join(' ');
+    if(expression.length == 1 && expression[0].length == 1){
+        expression[0] = 0;
+    } else if (expression.length == 1 && expression[0] == 0){
+        return
+    } else if (expression[expression.length-1].length > 1){
+        expression[expression.length-1] = expression[expression.length-1].slice(0, -1);
+    } else {  
+        expression.pop();
+    }
+    print()
 }
 
