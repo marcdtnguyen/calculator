@@ -39,8 +39,8 @@ function handleValue(v){
         case "=": evaluate(expression); break;
         case "Enter": evaluate(expression); break;
         case "Backspace": remove(); break;
-        case "clear" : expression = ['0'];
-        case "ans" : addKey(ans);
+        case "clear" : expression = ['0']; break;
+        case "ans" : addKey(ans); break;
         default: addKey(v);
     }
     print();
