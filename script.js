@@ -5,8 +5,10 @@ function divide(a, b) { return a / b };
 function powerOf(a, b) { return a ** b};
 
 const result = document.querySelector('.result');
-const value = document.querySelector('.expression')
+const format = result.innerText.split(' ');
+const value = document.querySelector('.expression');
 let expression = ['0'];
+let ans = 0;
 const operations = {
     '^': powerOf,
     '*': multiply,
@@ -38,6 +40,7 @@ function handleValue(v){
         case "Enter": evaluate(expression); break;
         case "Backspace": remove(); break;
         case "clear" : expression = ['0'];
+        case "ans" : addKey(ans);
         default: addKey(v);
     }
     print();
@@ -84,6 +87,9 @@ function evaluate(){
     for(let key in operations){
         evalOp(key, operations[key]);
     }
+    ans = expression[0].toString();
+    format[format.length-1] = ans;
+    result.innerText = format.join(' ');
 }
 
 function evalOp(op, meth){
