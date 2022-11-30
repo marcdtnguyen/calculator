@@ -52,3 +52,9 @@ button {
     background-color: rgb(24, 24, 24);
     color: rgb(214, 214, 214);
 }
+
+button[value='delete'],
+button[value='clear']{
+    background-color: rgb(255, 145, 1);
+    color: black
+}
